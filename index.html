@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<!---
+    Author: Darrin Phimphisane
+    Date Created: 2024-06-10
+--->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Showcase and Argumentative Section</title>
+    <link rel="stylesheet" href="./styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Meme Showcase</h1>
+    </header>
+    <nav>
+        <a href="./index.html#memes">Memes</a>
+        <a href="./argument.html">Argument</a>
+        <a href="./cited.html">Cited Sources</a>
+        <a href="./contact.html">How I Created This</a>
+        <a href="mailto:example@example.com">Email Us</a>
+    </nav>
+    <div class="container">
+        <section id="memes" class="meme-gallery">
+            <img src="./kanye_prob.jpg" alt="Meme 1">
+            <img src="./averagekanyerant.gif" alt="Meme 2">
+            <img src="./media-ye.jpg" alt="Meme 3">
+            <img src="./KanyeBeforeSnickers.jpg" alt="Meme 4">
+            <img src="./KanyeBeforeMeds.jpg" alt="Meme 5">
+            <img src="./kanye-dance.gif" alt="Meme 6">
+        </section>
+    </div>
+    <footer>
+        <p>Copyright © Darrin Phimphisane 2025</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.querySelector('.meme-gallery');
+            const memes = Array.from(carousel.querySelectorAll('img'));
+
+            let currentIndex = 0;
+
+            const updateCarousel = () => {
+                memes.forEach((meme, index) => {
+                    meme.style.display = index === currentIndex ? 'block' : 'none';
+                });
+            };
+
+            const nextMeme = () => {
+                currentIndex = (currentIndex + 1) % memes.length;
+                updateCarousel();
+            };
+
+            const prevMeme = () => {
+                currentIndex = (currentIndex - 1 + memes.length) % memes.length;
+                updateCarousel();
+            };
+
+            const nextButton = document.createElement('button');
+            nextButton.textContent = 'Next';
+            nextButton.style.position = 'absolute';
+            nextButton.style.right = '10px';
+            nextButton.style.top = '50%';
+            nextButton.style.transform = 'translateY(-50%)';
+            nextButton.style.backgroundColor = '#333';
+            nextButton.style.color = '#fff';
+            nextButton.style.border = 'none';
+            nextButton.style.padding = '10px 20px';
+            nextButton.style.borderRadius = '5px';
+            nextButton.style.cursor = 'pointer';
+            nextButton.style.fontSize = '16px';
+            nextButton.addEventListener('click', nextMeme);
+
+            const prevButton = document.createElement('button');
+            prevButton.textContent = 'Previous';
+            prevButton.style.position = 'absolute';
+            prevButton.style.left = '10px';
+            prevButton.style.top = '50%';
+            prevButton.style.transform = 'translateY(-50%)';
+            prevButton.style.backgroundColor = '#333';
+            prevButton.style.color = '#fff';
+            prevButton.style.border = 'none';
+            prevButton.style.padding = '10px 20px';
+            prevButton.style.borderRadius = '5px';
+            prevButton.style.cursor = 'pointer';
+            prevButton.style.fontSize = '16px';
+            prevButton.addEventListener('click', prevMeme);
+
+            carousel.style.position = 'relative';
+            carousel.style.overflow = 'hidden';
+            carousel.style.width = '100%';
+            carousel.style.height = '500px';
+
+            memes.forEach(meme => {
+                meme.style.position = 'absolute';
+                meme.style.top = '0';
+                meme.style.left = '0';
+                meme.style.width = '100%'; // Adjusted to make the image fill the container
+                meme.style.height = '100%';
+                meme.style.objectFit = 'contain'; // Ensure the entire image is visible within the container
+                meme.style.margin = '0';
+            });
+
+            carousel.appendChild(nextButton);
+            carousel.appendChild(prevButton);
+
+            updateCarousel();
+        });
+    </script>
+</body>
+</html>
